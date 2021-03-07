@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Spark-core-tool" />
         <module name="Spark-core-redis" />
+        <module name="Spark-core-common" />
+        <module name="Spark-core-mybatisplus" />
         <module name="Spark-core-user" />
       </profile>
     </annotationProcessing>

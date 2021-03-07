@@ -1,6 +1,7 @@
 package com.lyc.spark.core.redis.config;
 
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
+import com.lyc.spark.core.redis.properties.SparkCoreRedisProperties;
 import com.lyc.spark.core.redis.util.RedisUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -21,8 +22,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @ConditionalOnClass(RedisOperations.class)
 
 @EnableConfigurationProperties(RedisProperties.class)
-// 如果yml或property文件配置了redis则该配置生效
-//@ConditionalOnProperty(value = "spring.redis", havingValue = "true", matchIfMissing = false)
+// 如果yml或property文件配置了spark.core.redis = true则该配置生效
+@ConditionalOnProperty(value = SparkCoreRedisProperties.PREFIX_KEY + ".enabled", havingValue = "true", matchIfMissing = true)
 public class RedisConfig {
 
     @Bean
@@ -38,6 +39,7 @@ public class RedisConfig {
         template.setKeySerializer(new StringRedisSerializer());
         template.setHashKeySerializer(new StringRedisSerializer());
         template.setConnectionFactory(redisConnectionFactory);
+        System.out.println("ii");
         return template;
     }
 
@@ -46,12 +48,14 @@ public class RedisConfig {
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         StringRedisTemplate template = new StringRedisTemplate();
         template.setConnectionFactory(redisConnectionFactory);
+        System.out.println("jj");
+
         return template;
     }
 
 
     @Bean
-    @ConditionalOnMissingBean(StringRedisTemplate.class)
+    @ConditionalOnMissingBean(RedisUtil.class)
     public RedisUtil redisUtil() {
         RedisUtil mRedisUtil = new RedisUtil();
         return mRedisUtil;

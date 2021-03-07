@@ -20,6 +20,10 @@
         <captcha.version>1.6.2</captcha.version>
         <easyexcel.version>2.2.6</easyexcel.version>
 
+        <mysql.connector.version>8.0.21</mysql.connector.version>
+        <mybatis.plus.version>3.3.2</mybatis.plus.version>
+        <hutool.version>5.4.4</hutool.version>
+
         <!-- spring cloud spring boot 版本组合推荐  https://start.spring.io/actuator/info-->
         <spring.boot.version>2.3.9.RELEASE</spring.boot.version>
         <spring.cloud.version>Hoxton.SR10</spring.cloud.version>
@@ -35,6 +39,8 @@
         <!--  spark core  核心公共版本号    -->
         <spark.core.tool.version>1.0.0</spark.core.tool.version>
         <spark.core.user.version>1.0.0</spark.core.user.version>
+        <spark.core.redis.version>1.0.0</spark.core.redis.version>
+        <spark.core.common.version>1.0.0</spark.core.common.version>
 
         <alibaba.fastjson.version>1.2.75</alibaba.fastjson.version>
 
@@ -102,6 +108,39 @@
                 <version>${alibaba.fastjson.version}</version>
             </dependency>
 
+            <!--mysql -->
+
+            <!-- mysql -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!-- mybatis-plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <!--MyBatis Plus 代码生成器-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <!--Hutool Java工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+
+
             <!-- spring plugin-->
             <dependency>
                 <groupId>org.springframework.plugin</groupId>
@@ -113,14 +152,27 @@
                 <artifactId>spring-plugin-metadata</artifactId>
                 <version>${spring.plugin.version}</version>
             </dependency>
+
+
         </dependencies>
     </dependencyManagement>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 
     <modules>
         <module>Spark-core-tool</module>
         <module>Spark-core-user</module>
         <module>Spark-core-redis</module>
+        <module>Spark-core-common</module>
+        <module>Spark-core-mybatisplus</module>
     </modules>
 
 

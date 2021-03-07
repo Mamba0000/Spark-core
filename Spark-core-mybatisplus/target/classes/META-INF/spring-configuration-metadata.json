@@ -1,0 +1,19 @@
+{
+  "groups": [
+    {
+      "name": "spark.core.redis",
+      "type": "com.lyc.spark.core.mybatisplus.properties.SparkCoreMybatisPlusProperties",
+      "sourceType": "com.lyc.spark.core.mybatisplus.properties.SparkCoreMybatisPlusProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spark.core.redis.enable",
+      "type": "java.lang.Boolean",
+      "description": "是否开启",
+      "sourceType": "com.lyc.spark.core.mybatisplus.properties.SparkCoreMybatisPlusProperties",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}
