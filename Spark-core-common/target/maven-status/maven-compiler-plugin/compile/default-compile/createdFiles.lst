@@ -1,4 +1,12 @@
 com/lyc/spark/core/common/api/IResultCode.class
-com/lyc/spark/core/common/api/ResultCode.class
+com/lyc/spark/core/common/exception/CaptchaException.class
+com/lyc/spark/core/common/constant/TokenConstant.class
+com/lyc/spark/core/common/exception/ServiceException.class
+com/lyc/spark/core/common/exception/BaseException.class
 com/lyc/spark/core/common/constant/AppConstant.class
+com/lyc/spark/core/common/api/ResultCode.class
+com/lyc/spark/core/common/exception/PreviewException.class
+com/lyc/spark/core/common/exception/TokenException.class
+com/lyc/spark/core/common/constant/CacheNames.class
+com/lyc/spark/core/common/exception/AuthException.class
 com/lyc/spark/core/common/api/CommonResult.class

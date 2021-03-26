@@ -1,3 +1,12 @@
+/Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/exception/ServiceException.java
+/Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/exception/TokenException.java
+/Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/constant/TokenConstant.java
+/Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/constant/CacheNames.java
 /Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/api/CommonResult.java
+/Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/exception/AuthException.java
 /Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/api/ResultCode.java
+/Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/exception/BaseException.java
+/Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/exception/CaptchaException.java
 /Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/api/IResultCode.java
+/Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/exception/PreviewException.java
+/Users/robin/Documents/github/Spark-core/Spark-core-common/src/main/java/com/lyc/spark/core/common/constant/AppConstant.java

@@ -1,125 +1,203 @@
 package com.lyc.spark.core.common.api;
 
+import com.lyc.spark.core.constant.BladeConstant;
+import com.lyc.spark.core.tool.ObjectUtil;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.lang.Nullable;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
+@Getter
+@Setter
 public class CommonResult<T> {
-    private long code;
-    private String message;
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "状态码", required = true)
+    private int code;
+    @ApiModelProperty(value = "是否成功", required = true)
+    private boolean success;
+    @ApiModelProperty(value = "承载数据")
     private T data;
+    @ApiModelProperty(value = "返回消息", required = true)
+    private String msg;
 
-    protected CommonResult() {
+    public CommonResult() {
+
     }
 
-    protected CommonResult(long code, String message, T data) {
+    private CommonResult(IResultCode resultCode) {
+        this(resultCode, null, resultCode.getMessage());
+    }
+
+    private CommonResult(IResultCode resultCode, String msg) {
+        this(resultCode, null, msg);
+    }
+
+    private CommonResult(IResultCode resultCode, T data) {
+        this(resultCode, data, resultCode.getMessage());
+    }
+
+    private CommonResult(IResultCode resultCode, T data, String msg) {
+        this(resultCode.getCode(), data, msg);
+    }
+
+    private CommonResult(int code, T data, String msg) {
         this.code = code;
-        this.message = message;
         this.data = data;
+        this.msg = msg;
+        this.success = ResultCode.SUCCESS.getCode() == code;
     }
 
     /**
-     * 成功
+     * 判断返回是否为成功
      *
-     * @param data 获取的数据
+     * @param result Result
+     * @return 是否成功
      */
-    public static <T> CommonResult<T> success(T data) {
-        return new CommonResult<T>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), data);
+    public static boolean isSuccess(@Nullable CommonResult<?> result) {
+        return Optional.ofNullable(result)
+                .map(x -> ObjectUtil.nullSafeEquals(ResultCode.SUCCESS.getCode(), x.code))
+                .orElse(Boolean.FALSE);
     }
 
     /**
-     * 成功
+     * 判断返回是否为成功
      *
-     * @param data    获取的数据
-     * @param message 提示信息
+     * @param result Result
+     * @return 是否成功
      */
-    public static <T> CommonResult<T> success(T data, String message) {
-        return new CommonResult<T>(ResultCode.SUCCESS.getCode(), message, data);
+    public static boolean isNotSuccess(@Nullable CommonResult<?> result) {
+        return !CommonResult.isSuccess(result);
     }
 
     /**
-     * 失败
+     * 返回R
      *
-     * @param errorCode 错误码
+     * @param data 数据
+     * @param <T>  T 泛型标记
+     * @return R
      */
-    public static <T> CommonResult<T> fail(IResultCode errorCode) {
-        return new CommonResult<T>(errorCode.getCode(), errorCode.getMessage(), null);
+    public static <T> CommonResult<T> data(T data) {
+        return data(data, BladeConstant.DEFAULT_SUCCESS_MESSAGE);
     }
 
     /**
-     * 失败
+     * 返回R
      *
-     * @param errorCode 错误码
-     * @param message   错误信息
+     * @param data 数据
+     * @param msg  消息
+     * @param <T>  T 泛型标记
+     * @return R
      */
-    public static <T> CommonResult<T> fail(IResultCode errorCode, String message) {
-        return new CommonResult<T>(errorCode.getCode(), message, null);
+    public static <T> CommonResult<T> data(T data, String msg) {
+        return data(HttpServletResponse.SC_OK, data, msg);
     }
 
     /**
-     * 失败
+     * 返回R
      *
-     * @param message 提示信息
+     * @param code 状态码
+     * @param data 数据
+     * @param msg  消息
+     * @param <T>  T 泛型标记
+     * @return R
      */
-    public static <T> CommonResult<T> fail(String message) {
-        return new CommonResult<T>(ResultCode.FAILED.getCode(), message, null);
+    public static <T> CommonResult<T> data(int code, T data, String msg) {
+        return new CommonResult<>(code, data, data == null ? BladeConstant.DEFAULT_NULL_MESSAGE : msg);
     }
 
     /**
-     * 失败
-     */
-    public static <T> CommonResult<T> fail() {
-        return fail(ResultCode.FAILED);
-    }
-
-    /**
-     * 参数验证失败返回结果
-     */
-    public static <T> CommonResult<T> validateFail() {
-        return fail(ResultCode.VALIDATE_FAILED);
-    }
-
-    /**
-     * 参数验证失败返回结果
+     * 返回R
      *
-     * @param message 提示信息
+     * @param msg 消息
+     * @param <T> T 泛型标记
+     * @return R
      */
-    public static <T> CommonResult<T> validateFail(String message) {
-        return new CommonResult<T>(ResultCode.VALIDATE_FAILED.getCode(), message, null);
+    public static <T> CommonResult<T> success(String msg) {
+        return new CommonResult<>(ResultCode.SUCCESS, msg);
     }
 
     /**
-     * 未登录返回结果
+     * 返回R
+     *
+     * @param resultCode 业务代码
+     * @param <T>        T 泛型标记
+     * @return R
      */
-    public static <T> CommonResult<T> unauthorized(T data) {
-        return new CommonResult<T>(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), data);
+    public static <T> CommonResult<T> success(IResultCode resultCode) {
+        return new CommonResult<>(resultCode);
     }
 
     /**
-     * 未授权返回结果
+     * 返回R
+     *
+     * @param resultCode 业务代码
+     * @param msg        消息
+     * @param <T>        T 泛型标记
+     * @return R
      */
-    public static <T> CommonResult<T> forbidden(T data) {
-        return new CommonResult<T>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), data);
+    public static <T> CommonResult<T> success(IResultCode resultCode, String msg) {
+        return new CommonResult<>(resultCode, msg);
     }
 
-    public long getCode() {
-        return code;
+    /**
+     * 返回R
+     *
+     * @param msg 消息
+     * @param <T> T 泛型标记
+     * @return R
+     */
+    public static <T> CommonResult<T> fail(String msg) {
+        return new CommonResult<>(ResultCode.FAILED, msg);
     }
 
-    public void setCode(long code) {
-        this.code = code;
+
+    /**
+     * 返回R
+     *
+     * @param code 状态码
+     * @param msg  消息
+     * @param <T>  T 泛型标记
+     * @return R
+     */
+    public static <T> CommonResult<T> fail(int code, String msg) {
+        return new CommonResult<>(code, null, msg);
     }
 
-    public String getMessage() {
-        return message;
+    /**
+     * 返回R
+     *
+     * @param resultCode 业务代码
+     * @param <T>        T 泛型标记
+     * @return R
+     */
+    public static <T> CommonResult<T> fail(IResultCode resultCode) {
+        return new CommonResult<>(resultCode);
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    /**
+     * 返回R
+     *
+     * @param resultCode 业务代码
+     * @param msg        消息
+     * @param <T>        T 泛型标记
+     * @return R
+     */
+    public static <T> CommonResult<T> fail(IResultCode resultCode, String msg) {
+        return new CommonResult<>(resultCode, msg);
     }
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
+    /**
+     * 返回R
+     *
+     * @param flag 成功状态
+     * @return R
+     */
+    public static <T> CommonResult<T> status(boolean flag) {
+        return flag ? success(BladeConstant.DEFAULT_SUCCESS_MESSAGE) : fail(BladeConstant.DEFAULT_FAILURE_MESSAGE);
     }
 }
