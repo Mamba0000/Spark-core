@@ -2,7 +2,7 @@ package com.lyc.spark.core.common.constant;
 
 public interface TokenConstant {
 
-    String SIGN_KEY = "AFDSFSDHTDSAFKNDSAFDSKLNBVVBMN";
+    String SIGN_KEY = "AFDSFSDHTDDSFSDAFDSAFDSAFDSAFDSAFSDAFDSAFASDFDSAFDSAFDSAFASDFAFDSASAFKNDSAFDSKLNBVVBMN";
     String AVATAR = "avatar";
     String HEADER = "spark-auth";
     String BEARER = "spark-hearer";

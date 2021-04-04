@@ -12,6 +12,8 @@
         <module name="Spark-core-common" />
         <module name="Spark-core-swagger" />
         <module name="Spark-core-mybatisplus" />
+        <module name="Spark-core-web" />
+        <module name="Spark-core-sentinel" />
         <module name="Spark-core-auth" />
         <module name="Spark-core-user" />
       </profile>

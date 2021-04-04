@@ -36,9 +36,14 @@ public class PreAuthAspect {
 	 */
 	private static final String ALL_PERMISSION = "*:*:*";
 
-	private final HttpServletRequest request;
+	private  HttpServletRequest request;
 
-	private final RedisUtil redisService;
+//	private  RedisUtil redisService;
+
+
+	public PreAuthAspect() {
+
+	}
 
 	@Around("@annotation(com.lyc.spark.core.auth.annotation.PreAuth)")
 	public Object around(ProceedingJoinPoint point) throws Throwable {
@@ -82,7 +87,7 @@ public class PreAuthAspect {
 //			return true;
 //		}
 
-		List<String> authorities = Arrays.asList(SecureUtil.getUserPermissions().split("$"));
+		List<String> authorities = Arrays.asList(SecureUtil.getUserPermissions().split("\\$"));
 		return hasPermissions(authorities, permission);
 	}
 

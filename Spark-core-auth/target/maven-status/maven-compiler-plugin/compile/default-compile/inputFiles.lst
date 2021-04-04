@@ -6,4 +6,5 @@
 /Users/robin/Documents/github/Spark-core/Spark-core-auth/src/main/java/com/lyc/spark/core/auth/util/SecureUtil.java
 /Users/robin/Documents/github/Spark-core/Spark-core-auth/src/main/java/com/lyc/spark/core/auth/annotation/EnableToken.java
 /Users/robin/Documents/github/Spark-core/Spark-core-auth/src/main/java/com/lyc/spark/core/auth/info/TokenInfo.java
+/Users/robin/Documents/github/Spark-core/Spark-core-auth/src/main/java/com/lyc/spark/core/auth/config/AuthAspectConfig.java
 /Users/robin/Documents/github/Spark-core/Spark-core-auth/src/main/java/com/lyc/spark/core/auth/enums/BladeUserEnum.java

@@ -163,16 +163,18 @@ public class SecureUtil {
     }
 
     public static Claims getClaims(HttpServletRequest request) {
-        String auth = request.getHeader("blade-auth");
+        String auth = request.getHeader(TokenConstant.HEADER);
         String parameter;
         if (StringUtil.isNotBlank(auth) && auth.length() > AUTH_LENGTH) {
-            parameter = auth.substring(0, 6).toLowerCase();
-            if (parameter.compareTo("bearer") == 0) {
-                auth = auth.substring(7);
-                return parseJWT(auth);
-            }
+            // 目前没加前缀所以也不需要切割
+            return parseJWT(auth);
+//            parameter = auth.substring(0, 6).toLowerCase();
+//            if (parameter.compareTo("bearer") == 0) {
+//                auth = auth.substring(7);
+//                return parseJWT(auth);
+//            }
         } else {
-            parameter = request.getParameter("blade-auth");
+            parameter = request.getParameter(TokenConstant.HEADER);
             if (StringUtil.isNotBlank(parameter)) {
                 return parseJWT(parameter);
             }
@@ -218,10 +220,10 @@ public class SecureUtil {
             user.forEach(builder::claim);
 //            builder.claim("client_id", clientId);
             long expireMillis;
-            if (tokenType.equals("access_token")) {
+            if (tokenType.equals(TokenConstant.ACCESS_TOKEN)) {
 //                expireMillis = (long)(clientDetails.getAccessTokenValidity() * 1000);
                 expireMillis = 5 * 24  * 60 * 60 * 1000;
-            } else if (tokenType.equals("refresh_token")) {
+            } else if (tokenType.equals(TokenConstant.REFRESH_TOKEN)) {
 //                expireMillis = (long)(clientDetails.getRefreshTokenValidity() * 1000);
                 expireMillis = 5 * 24  * 60 * 60 * 1000;
             } else {
@@ -299,7 +301,7 @@ public class SecureUtil {
 
     static {
         AUTH_LENGTH = TokenConstant.AUTH_LENGTH;
-        BASE64_SECURITY = Base64.getEncoder().encodeToString("bladexisapowerfulmicroservicearchitectureupgradedandoptimizedfromacommercialproject".getBytes(Charsets.UTF_8));
+        BASE64_SECURITY = Base64.getEncoder().encodeToString(TokenConstant.SIGN_KEY.getBytes(Charsets.UTF_8));
 //        clientDetailsService = (IClientDetailsService)SpringUtil.getBean(IClientDetailsService.class);
     }
 }

@@ -48,6 +48,8 @@
         <spark.core.redis.version>1.0.0</spark.core.redis.version>
         <spark.core.common.version>1.0.0</spark.core.common.version>
         <spark.core.swagger.version>1.0.0</spark.core.swagger.version>
+        <spark.core.web.version>1.0.0</spark.core.web.version>
+        <spark.core.sentinel.version>1.0.0</spark.core.sentinel.version>
 
         <alibaba.fastjson.version>1.2.75</alibaba.fastjson.version>
 
@@ -200,7 +202,7 @@
                 <version>${swagger.version}</version>
             </dependency>
 
-
+            <!---->
         </dependencies>
     </dependencyManagement>
 
@@ -222,6 +224,8 @@
         <module>Spark-core-mybatisplus</module>
         <module>Spark-core-swagger</module>
         <module>Spark-core-auth</module>
+        <module>Spark-core-web</module>
+        <module>Spark-core-sentinel</module>
     </modules>
 
 
