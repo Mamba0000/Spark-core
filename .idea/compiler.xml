@@ -18,8 +18,5 @@
         <module name="Spark-core-user" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Spark-core" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
